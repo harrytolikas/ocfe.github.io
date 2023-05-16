@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OCFE</title>
+</head>
+<body>
+	<h1>OSINT CTI Feed Evaluation</h1>
+      <style>
+		body {
+			text-align: center;
+		}
+	</style>
+      <form action="evaluation.html" method="post" align="center">
+            <label for="cti-resource">Select a CTI resource:</label>
+            <select id="cti-resource" name="cti-resource">
+              <option value="MITRE ATT&CK">MITRE ATT&CK</option>
+              <option value="AlienVault">AlienVault</option>
+              <option value="VIRUSTOTAL">VIRUSTOTAL</option>
+              <option value="OpenCTI">OpenCTI</option>
+              <option value="Cyware Threat Intelligence Feeds">Cyware Threat Intelligence Feeds</option>
+              <option value="other">Other (please specify below)</option>
+            </select>
+            <br>
+            <br>
+
+            <label for="new-resource">If other, please specify:</label>
+            <input type="text" id="new-resource" name="new-resource">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+      </form>    
+</body>
+</html>
