@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OCFE</title>
+    <style>
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<h1>Evaluation Resurlts</h1>
+	<script>
+        // Insert evaluation data into the table
+        var attributes = {
+        "Timeliness": document.getElementById("timeliness").value,
+        "Relevance": document.getElementById("relevance").value,
+        "Completeness": document.getElementById("completeness").value,
+        "Ingestibility": document.getElementById("ingestibility").value,
+        "Accuracy": document.getElementById("accuracy").value,
+        "Uniqueness": document.getElementById("uniqueness").value,
+        "Actionable": document.getElementById("actionable").value,
+        "Compliance": document.getElementById("compliance").value,
+        "Intelligence": document.getElementById("intelligence").value,
+        "Predictability": document.getElementById("predictability").value,
+        "Maintenance": document.getElementById("maintenance").value,
+        "Priority": document.getElementById("priority").value,
+        "Impact": document.getElementById("impact").value,
+        "Utility of Products": document.getElementById("utility_of_products").value,
+        "Context": document.getElementById("context").value,
+        "False Positives": document.getElementById("false_positives").value
+        };
+
+        var gradingValues = [
+        attributes["Timeliness"],
+        attributes["Relevance"],
+        attributes["Completeness"],
+        attributes["Ingestibility"],
+        attributes["Accuracy"],
+        attributes["Uniqueness"],
+        attributes["Actionable"],
+        attributes["Compliance"],
+        attributes["Intelligence"],
+        attributes["Predictability"],
+        attributes["Maintenance"],
+        attributes["Priority"],
+        attributes["Impact"],
+        attributes["Utility of Products"],
+        attributes["Context"],
+        attributes["False Positives"]
+        ];
+
+        var sumGrading = gradingValues.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
+
+    </script>
+	<table border="1" align="center">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Attribute</th>
+				<th>Grading Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php $i = 1; ?>
+			<?php foreach ($attributes as $attribute => $grade) { ?>
+				<tr>
+					<td><?php echo $i++; ?></td>
+					<td><?php echo $attribute; ?></td>
+					<td><?php echo $grade; ?></td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+    <br>
+    <br>
+    <table border="1"  align="center">
+		<tbody>
+            <tr>
+                <td>Aggregated Evaluation</td>
+                <td><?php echo $sum_grading ?></td>
+            </tr>		
+        </tbody>
+    </table>
+    <br>
+    <br>
+    
+    <script>
+        if (document.getElementById('tactical').checked && 
+            document.getElementById('strategic').checked && 
+            document.getElementById('technical').checked && 
+            document.getElementById('operational').checked) {
+
+        var tactical = document.getElementById('tactical').value;
+        var strategic = document.getElementById('strategic').value;
+        var technical = document.getElementById('technical').value;
+        var operational = document.getElementById('operational').value;
+        
+        var outputDiv = document.createElement('div');
+        outputDiv.style.width = '50%';
+        outputDiv.style.margin = '0 auto';
+        
+        var heading = document.createElement('h2');
+        heading.textContent = 'Types of CTI included in the feed:';
+        outputDiv.appendChild(heading);
+        
+        var ul = document.createElement('ul');
+        if (tactical == 1) {
+            var tacticalLi = document.createElement('li');
+            tacticalLi.textContent = 'Tactical';
+            ul.appendChild(tacticalLi);
+        }
+        if (strategic == 1) {
+            var strategicLi = document.createElement('li');
+            strategicLi.textContent = 'Strategic';
+            ul.appendChild(strategicLi);
+        }
+        if (technical == 1) {
+            var technicalLi = document.createElement('li');
+            technicalLi.textContent = 'Technical';
+            ul.appendChild(technicalLi);
+        }
+        if (operational == 1) {
+            var operationalLi = document.createElement('li');
+            operationalLi.textContent = 'Operational';
+            ul.appendChild(operationalLi);
+        }
+        outputDiv.appendChild(ul);
+        
+        document.body.appendChild(outputDiv);
+        }
+
+    </script>
+
+    <br>
+    <br>
+    <input type="button" value="Return to Home Page" onclick="location.href='home.html';">
+
+</body>
+</html>

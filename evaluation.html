@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OCFE</title>
+</head>
+<body>
+    <div style="display: inline-block;">
+        <h1 style="display: inline-block;"> OSINT CTI selected:</h1>
+        <style>
+		    body {
+			text-align: center;
+		    }
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+            th, td {
+              padding: 5px;
+              text-align: left;
+            }
+	    </style>
+        <div class="inline">
+            <script>
+            if (document.getElementById('cti-resource').value) {
+                var selectedCti = document.getElementById('cti-resource').value;
+                if (selectedCti === 'other' && document.getElementById('new-resource').value) {
+                  var newResource = document.getElementById('new-resource').value;
+                  
+                  var resourceDescriptionLabel = document.createElement('label');
+                  resourceDescriptionLabel.textContent = 'Please provide a description of the resource (up to 200 words):';
+                  document.body.appendChild(resourceDescriptionLabel);
+                  document.body.appendChild(document.createElement('br'));
+              
+                  var resourceDescriptionTextarea = document.createElement('textarea');
+                  resourceDescriptionTextarea.id = 'new-resource-description';
+                  resourceDescriptionTextarea.name = 'new-resource-description';
+                  resourceDescriptionTextarea.rows = '4';
+                  resourceDescriptionTextarea.cols = '100';
+                  resourceDescriptionTextarea.maxLength = '200';
+                  document.body.appendChild(resourceDescriptionTextarea);
+                  document.body.appendChild(document.createElement('br'));
+                  document.body.appendChild(document.createElement('br'));
+              
+                  var resourceLinkLabel = document.createElement('label');
+                  resourceLinkLabel.textContent = 'Please provide a legit link to the resource:';
+                  document.body.appendChild(resourceLinkLabel);
+                  document.body.appendChild(document.createElement('br'));
+              
+                  var resourceLinkTextarea = document.createElement('textarea');
+                  resourceLinkTextarea.id = 'new-resource-link';
+                  resourceLinkTextarea.name = 'new-resource-link';
+                  resourceLinkTextarea.rows = '1';
+                  resourceLinkTextarea.cols = '100';
+                  resourceLinkTextarea.maxLength = '50';
+                  document.body.appendChild(resourceLinkTextarea);
+                  document.body.appendChild(document.createElement('br'));
+                  document.body.appendChild(document.createElement('br'));
+                } else {
+                  var selectedCtiElement = document.createElement('p');
+                  selectedCtiElement.style.fontSize = '28px';
+                  selectedCtiElement.style.color = 'blue';
+                  selectedCtiElement.style.display = 'inline-block';
+                  selectedCtiElement.textContent = selectedCti;
+                  document.body.appendChild(selectedCtiElement);
+                }
+              }
+            </script>              
+        </div>
+        <form action="matrix_display.html" method="post" align="center">
+            <style>
+                table {
+                    border-collapse: collapse;
+                    width: 60%;
+                }
+
+                th, td {
+                    border: 2px solid black;
+                    padding: 10px;
+                    text-align: center;
+                    vertical-align: top;
+                }
+                
+            </style>
+            <table style="width:80%" align="center">
+                <tr>
+                    <th>Attribute</th>
+                    <th>Meaning</th>
+                    <th>Evaluation Level</th>
+                    <th>Comment</th>
+                </tr>
+                <tr>
+                    <td>Timeliness</td>
+                    <td>The speed and promptness with which new and updated information about potential cyber threats is delivered to the recipient, sharing and receiving up-to-date information in a timely fashion.</td>
+                    <td>
+                    <select name="timeliness" id="timeliness" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="timeliness_comment" id="timeliness_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Relevance</td>
+                    <td>The extent to which the information provided in the feed is applicable to an organization’s specific needs and risk profile.</td>
+                    <td>
+                    <select name="relevance" id="relevance" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="relevance_comment" id="relevance_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Completeness</td>
+                    <td>The extent to which the information provided in the feed is comprehensive and covers all relevant aspects of a potential cyber threat.</td>
+                    <td>
+                    <select name="completeness" id="completeness" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="completeness_comment" id="completeness_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Ingestibility</td>
+                    <td>The ease with which the information provided in the feed can be consumed, processed, and integrated into an organization’s existing security infrastructure.</td>
+                    <td>
+                    <select name="ingestibility" id="ingestibility" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="ingestibility_comment" id="ingestibility_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Accuracy</td>
+                    <td>The degree of correctness and reliability of the information provided in the feed.</td>
+                    <td>
+                    <select name="accuracy" id="accuracy" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="accuracy_comment" id="accuracy_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Uniqueness</td>
+                    <td>Refers to the distinctiveness and originality of the information provided in the feed.</td>
+                    <td>
+                    <select name="uniqueness" id="uniqueness" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="uniqueness_comment" id="uniqueness_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Actionable</td>
+                    <td>Refers to the extent to which the information provided can be used to take concrete, practical steps to defend against potential threats.</td>
+                    <td>
+                    <select name="actionable" id="actionable" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="actionable_comment" id="actionable_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Compliance</td>
+                    <td>The extent to which the feed aligns with legal and regulatory requirements that govern the collection, use, and dissemination of cyber threat intelligence.</td>
+                    <td>
+                    <select name="compliance" id="compliance" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="compliance_comment" id="compliance_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Intelligence</td>
+                    <td>Refers to the information and insights provided by the feed that can be used to improve an organization’s security posture and defend against cyber threats.</td>
+                    <td>
+                    <select name="intelligence" id="intelligence" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="intelligence_comment" id="intelligence_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Predictability</td>
+                    <td>The degree to which the feed can provide a forecast or estimate of future cyber threats and attacks.</td>
+                    <td>
+                    <select name="predictability" id="predictability" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="predictability_comment" id="predictability_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Maintenance</td>
+                    <td>Refers to the effort required to keep the information in the feed up-to-date and relevant.</td>
+                    <td>
+                    <select name="maintenance" id="maintenance" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="maintenance_comment" id="maintenance_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Priority</td>
+                    <td>Refers to the level of importance or urgency assigned to the information provided in the feed.</td>
+                    <td>
+                    <select name="priority" id="priority" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="priority_comment" id="priority_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Impact</td>
+                    <td>Refers to the level of harm or damage that a potential threat could cause to an organization’s systems and networks.</td>
+                    <td>
+                    <select name="impact" id="impact" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="impact_comment" id="impact_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Utility of Products</td>
+                    <td>The practical usefulness and value that the information provided by the feed delivers to the user or organization.</td>
+                    <td>
+                    <select name="utility_of_products" id="utility_of_products" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="utility_of_products_comment" id="utility_of_products_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Context</td>
+                    <td>Refers to the background information or additional details that accompany the information provided in the feed.</td>
+                    <td>
+                    <select name="context" id="context" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="context_comment" id="context_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>False Positives</td>
+                    <td>Refers to the number of incorrect or misleading information provided in the feed.</td>
+                    <td>
+                    <select name="false_positives" id="false_positives" required>
+                        <option value="">Choose Evaluation...</option>
+                        <option value="1">Excellent</option>
+                        <option value="0">Satisfactory</option>
+                        <option value="-1">Poor</option>
+                    </select>
+                    </td>
+                    <td>
+                        <textarea name="false_positives_comment" id="false_positives_comment" rows="3" cols="30" maxlength="100"></textarea>
+                    </td>
+                </tr>
+
+            </table>
+
+            <br>
+            <br>
+            <br>
+            
+            <table style="width:70%" align="center">
+                <tr>
+                    <th>Type of CTI</th>
+                    <th>Meaning</th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <td>Tactical</td>
+                    <td>Detailed information about specific threats or attacks, such as the tools and techniques used by attackers and their targets.</td>
+                    <td>
+                    <select name="tactical" id="tactical">
+                        <option value="0">Not Included</option>
+                        <option value="1">Included</option>
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Strategic</td>
+                    <td>Long-term trends and threats, providing decision-makers with insights into potential threats and risks to their organization. It includes information about the threat actors, their motives, and tactics, techniques, and procedures (TTPs).</td>
+                    <td>
+                    <select name="strategic" id="strategic">
+                        <option value="0">Not Included</option>
+                        <option value="1">Included</option>
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Technical</td>
+                    <td>Technical details related to a threat, such as vulnerabilities, exploits, malware, and infrastructure used by the adversaries.</td>
+                    <td>
+                    <select name="technical" id="technical">
+                        <option value="0">Not Included</option>
+                        <option value="1">Included</option>
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Operational</td>
+                    <td>Information that is actionable for security operations teams, such as indicators of compromise (IOCs) and TTPs that can be used to detect and respond to threats.</td>
+                    <td>
+                    <select name="operational" id="operational">
+                        <option value="0">Not Included</option>
+                        <option value="1">Included</option>
+                    </select>
+                    </td>
+                </tr>
+
+            </table>
+            
+            <br>
+            <br>
+
+            <input type="submit" name="submit" value="Submit Evaluation">
+        </form>
+    </div>
+</body>
+</html>
